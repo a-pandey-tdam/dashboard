@@ -10,33 +10,43 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { averageTicketsCreated } from "@/data/average-tickets-created";
+
 import { dateRangeAtom } from "@/lib/atoms";
 import { cn } from "@/lib/utils";
 
-export function DatePickerWithRange({
-  className,
-}: React.HTMLAttributes<HTMLDivElement>) {
+type Average = {
+  date: string;
+  emails: number;
+  errors_caught: number;
+}
+
+export function DatePickerWithRange( {averages} : {averages: Average[]}) {
   const [dateRange, setDateRange] = useAtom(dateRangeAtom);
 
-  const firstAvailableDate = averageTicketsCreated.reduce(
-    (minDate, current) => {
-      const currentDate = parseISO(current.date);
-      return currentDate < minDate ? currentDate : minDate;
-    },
-    parseISO(averageTicketsCreated[0].date),
-  );
+  const defaultDate: Date = new Date(2023, 10, 15);
 
-  const lastAvailableDate = averageTicketsCreated.reduce(
-    (maxDate, current) => {
-      const currentDate = parseISO(current.date);
-      return currentDate > maxDate ? currentDate : maxDate;
-    },
-    parseISO(averageTicketsCreated[averageTicketsCreated.length - 1].date),
-  );
+  const firstAvailableDate = averages.length > 0 
+  ? averages.reduce(
+      (minDate, current) => {
+        const currentDate = parseISO(current.date);
+        return currentDate < minDate ? currentDate : minDate;
+      },
+      parseISO(averages[0].date),
+    )
+  : defaultDate;
+
+const lastAvailableDate = averages.length > 0 
+  ? averages.reduce(
+      (maxDate, current) => {
+        const currentDate = parseISO(current.date);
+        return currentDate > maxDate ? currentDate : maxDate;
+      },
+      parseISO(averages[averages.length - 1].date),
+    )
+  : defaultDate; 
 
   return (
-    <div className={cn("grid gap-2", className)}>
+    <div className={cn("grid gap-2")}>
       <Popover>
         <PopoverTrigger asChild>
           <Button

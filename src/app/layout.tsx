@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={cn("bg-background font-sans", gabarito.variable)}>
         <Providers>
           <div className="flex min-h-[100dvh]">
-            <SideNav />
+            {/* <SideNav /> */}
             <div className="flex-grow overflow-auto">{children}</div>
           </div>
         </Providers>

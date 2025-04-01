@@ -6,6 +6,12 @@ import type { IBarChartSpec } from "@visactor/vchart";
 import { ticketChartDataAtom } from "@/lib/atoms";
 import type { TicketMetric } from "@/types/types";
 
+type Average = {
+  date: string;
+  emails: number;
+  errors_caught: number;
+}
+
 const generateSpec = (data: TicketMetric[]): IBarChartSpec => ({
   type: "bar",
   data: [
@@ -37,14 +43,14 @@ const generateSpec = (data: TicketMetric[]): IBarChartSpec => ({
     style: {
       cornerRadius: [12, 12, 12, 12],
       zIndex: (datum) => {
-        return datum.type === "resolved" ? 2 : 1;
+        return datum.type === "errors_caught" ? 2 : 1;
       },
     },
   },
 });
 
-export default function Chart() {
-  const ticketChartData = useAtomValue(ticketChartDataAtom);
+export default function Chart({averages}:{averages: Average[]}) {
+  const ticketChartData = useAtomValue(ticketChartDataAtom)(averages);
   const spec = generateSpec(ticketChartData);
   return <VChart spec={spec} />;
 }

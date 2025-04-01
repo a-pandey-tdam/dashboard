@@ -1,4 +1,3 @@
-import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 
 export default function User() {
@@ -14,11 +13,10 @@ export default function User() {
             height={36}
           />
           <div className="flex flex-col">
-            <span className="text-sm font-medium">Name</span>
-            <span className="text-xs text-muted-foreground">Agent Admin</span>
+            <span className="text-sm font-medium">Dashboard</span>
+            <span className="text-xs text-muted-foreground">Monitor</span>
           </div>
         </div>
-        <ChevronDown size={16} />
       </div>
     </div>
   );

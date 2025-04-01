@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { VisActorLogo } from "@/components/icons";
 
-export default function VisActor() {
+export default function TDAM() {
   return (
     <Link
       href="https://visactor.io"
@@ -11,8 +10,7 @@ export default function VisActor() {
       <div className="dot-matrix absolute left-0 top-0 -z-10 h-full w-full" />
       <span className="text-xs text-muted-foreground">Powered by</span>
       <div className="flex items-center space-x-2">
-        <VisActorLogo size={24} />
-        <span className="text-md text-accent-foreground">VisActor</span>
+        <span className="text-md text-center text-accent-foreground">TDAM Business Innovation</span>
       </div>
     </Link>
   );

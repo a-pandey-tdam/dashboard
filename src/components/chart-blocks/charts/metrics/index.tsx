@@ -1,8 +1,38 @@
+"use client"
+
 import Container from "@/components/container";
-import { metrics } from "@/data/metrics";
+import { fetchData } from "@/api/fetchData";
 import MetricCard from "./components/metric-card";
 
+import { useState, useEffect } from 'react'
+
+type Metric = {
+  title: string;
+  value: string;
+  change: number;
+}
+
 export default function Metrics() {
+  const [metrics, setMetrics] = useState<Metric[]>([]);
+
+  useEffect(() => {
+    let timerId: NodeJS.Timeout;
+
+    async function getMetrics(){
+      try{
+        const data = await fetchData<Metric[]>('metrics.json')
+        setMetrics(data);
+      } catch (error){
+        console.error('Error fetching metric data:', error);
+      }
+    }
+    getMetrics();
+
+    timerId = setInterval(getMetrics, 60_000);
+
+    return () => clearInterval(timerId)
+  }, []);
+
   return (
     <Container className="grid grid-cols-1 gap-y-6 border-b border-border py-4 phone:grid-cols-2 laptop:grid-cols-4">
       {metrics.map((metric) => (

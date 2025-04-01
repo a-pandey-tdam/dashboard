@@ -8,19 +8,19 @@ export type Navigation = {
 };
 
 export const siteConfig = {
-  title: "VisActor Next Template",
-  description: "Template for VisActor and Next.js",
+  title: "Email Assistant Dashboard",
+  description: "Dashboard for TDAMBI",
 };
 
 export const navigations: Navigation[] = [
   {
     icon: Gauge,
-    name: "Dashboard",
+    name: "Email Assistant",
     href: "/",
   },
-  {
-    icon: MessagesSquare,
-    name: "Ticket",
-    href: "/ticket",
-  },
+  // {
+  //   icon: MessagesSquare,
+  //   name: "Ticket",
+  //   href: "/ticket",
+  // },
 ];

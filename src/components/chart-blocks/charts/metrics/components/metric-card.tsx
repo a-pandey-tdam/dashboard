@@ -14,15 +14,15 @@ export default function MetricCard({
   className?: string;
 }) {
   return (
-    <section className={cn("flex flex-col", className)}>
-      <h2 className={cn(chartTitle({ color: "mute", size: "sm" }), "mb-1")}>
+    <section className={cn("flex flex-col p-4", className)}> 
+      <h2 className={cn(chartTitle({ color: "mute", size: "lg" }), "mb-2")}> 
         {title}
       </h2>
-      <div className="flex items-center gap-2">
-        <span className="text-xl font-medium">{value}</span>
+      <div className="flex items-center gap-4"> {/* Increased gap */}
+        <span className="text-3xl font-semibold">{value}</span> 
         <ChangeIndicator change={change} />
       </div>
-      <div className="text-xs text-muted-foreground">Compare to last month</div>
+      <div className="text-sm text-muted-foreground mt-2">Compared to yesterday</div> 
     </section>
   );
 }
@@ -31,19 +31,19 @@ function ChangeIndicator({ change }: { change: number }) {
   return (
     <span
       className={cn(
-        "flex items-center rounded-sm px-1 py-0.5 text-xs text-muted-foreground",
+        "flex items-center rounded-md px-2 py-1 text-sm font-medium", 
         change > 0
-          ? "bg-green-50 text-green-500 dark:bg-green-950"
-          : "bg-red-50 text-red-500 dark:bg-red-950",
+          ? "bg-green-100 text-green-600 dark:bg-green-800" 
+          : "bg-red-100 text-red-600 dark:bg-red-800", 
       )}
     >
       {change > 0 ? "+" : ""}
       {Math.round(change * 100)}%
       {change > 0 ? (
-        <ArrowUpRight className="ml-0.5 inline-block h-3 w-3" />
+        <ArrowUpRight className="ml-1 inline-block h-5 w-5" /> 
       ) : (
-        <ArrowDownRight className="ml-0.5 inline-block h-3 w-3" />
+        <ArrowDownRight className="ml-1 inline-block h-5 w-5" /> 
       )}
     </span>
   );
-}
+};
