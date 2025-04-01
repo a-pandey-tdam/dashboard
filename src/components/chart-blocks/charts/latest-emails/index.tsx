@@ -35,11 +35,11 @@ export default function LatestEmails() {
   }, []);
 
   return (
-    <section className="flex h-full flex-col gap-4 p-4">
+    <section className="flex h-full flex-col gap-4">
       <ChartTitle title="Latest Emails" icon={CirclePercent} />
       <Container className="overflow-x-auto mt-5">
         <div className="max-h-80 overflow-y-auto rounded-lg shadow-md">
-          <table className="w-full bg-white border border-gray-200"> {/* Adjusted to w-full */}
+          <table className="w-full bg-white border border-gray-200"> 
             <thead className="bg-blue-50 sticky top-0">
               <tr>
                 <th className="py-3 px-6 border-b border-gray-300 text-left text-blue-700 font-bold">Date</th>
