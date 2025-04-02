@@ -11,7 +11,7 @@ export const dateRangeAtom = atom<DateRange | undefined>({
 });
 
 
-export const ticketChartDataAtom = atom((get) => (averages: Average[]) => { 
+export const ticketChartDataAtom = atom((get) => (averages: Average[], series1: string, series2: string) => {
   const dateRange = get(dateRangeAtom);
 
   if (!dateRange?.from || !dateRange?.to) return [];
@@ -29,12 +29,12 @@ export const ticketChartDataAtom = atom((get) => (averages: Average[]) => {
       const res: TicketMetric[] = [
         {
           date: item.date,
-          type: "emails",
+          type: series1,
           count: item.data1,
         },
         {
           date: item.date,
-          type: "errors_caught",
+          type: series2,
           count: item.data2,
         },
       ];

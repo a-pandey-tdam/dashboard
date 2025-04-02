@@ -27,7 +27,7 @@ export default function AverageTicketsCreated({title, file, series1, series2}: a
 
 
   const [averages, setAverages] = useState<Average[]>([]); 
-  const ticketChartData = useAtomValue(ticketChartDataAtom)(averages);
+  const ticketChartData = useAtomValue(ticketChartDataAtom)(averages, series1, series2);
   const avg1 = calMetricCardValue(ticketChartData, series1);
   const avg2 = calMetricCardValue(ticketChartData, series2);
 
@@ -72,7 +72,7 @@ export default function AverageTicketsCreated({title, file, series1, series2}: a
           />
         </div>
         <div className="relative h-96 min-w-[320px] flex-1">
-          <Chart averages={averages}/>
+          <Chart averages={averages} series1 = {series1} series2 = {series2} />
         </div>
       </div>
     </section>

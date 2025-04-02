@@ -44,8 +44,14 @@ const generateSpec = (data: TicketMetric[]): IBarChartSpec => ({
   },
 });
 
-export default function Chart({averages}:{averages: Average[]}) {
-  const ticketChartData = useAtomValue(ticketChartDataAtom)(averages);
+interface ChartProps {
+  averages: Average[];
+  series1: string;
+  series2: string;
+}
+
+export default function Chart({ averages, series1, series2 }: ChartProps) {
+  const ticketChartData = useAtomValue(ticketChartDataAtom)(averages, series1, series2);
   const spec = generateSpec(ticketChartData);
   return <VChart spec={spec} />;
 }
