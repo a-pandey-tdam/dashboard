@@ -4,13 +4,8 @@ import { useAtomValue } from "jotai";
 import { VChart } from "@visactor/react-vchart";
 import type { IBarChartSpec } from "@visactor/vchart";
 import { ticketChartDataAtom } from "@/lib/atoms";
-import type { TicketMetric } from "@/types/types";
+import type { TicketMetric, Average } from "@/types/types";
 
-type Average = {
-  date: string;
-  emails: number;
-  errors_caught: number;
-}
 
 const generateSpec = (data: TicketMetric[]): IBarChartSpec => ({
   type: "bar",
@@ -43,7 +38,7 @@ const generateSpec = (data: TicketMetric[]): IBarChartSpec => ({
     style: {
       cornerRadius: [12, 12, 12, 12],
       zIndex: (datum) => {
-        return datum.type === "errors_caught" ? 2 : 1;
+        return datum.type === "data2" ? 2 : 1;
       },
     },
   },

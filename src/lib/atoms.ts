@@ -1,21 +1,15 @@
 import { addDays, endOfDay, isWithinInterval, startOfDay } from "date-fns";
 import { atom } from "jotai";
 import type { DateRange } from "react-day-picker";
+import type { TicketMetric, Average } from "@/types/types";
 
-import type { TicketMetric } from "@/types/types";
-
-const defaultStartDate = new Date(2023, 11, 18);
+const defaultStartDate = new Date(2025, 1, 5);
 
 export const dateRangeAtom = atom<DateRange | undefined>({
   from: defaultStartDate,
   to: addDays(defaultStartDate, 6),
 });
 
-type Average = {
-  date: string;
-  emails: number;
-  errors_caught: number;
-}
 
 export const ticketChartDataAtom = atom((get) => (averages: Average[]) => { 
   const dateRange = get(dateRangeAtom);
@@ -36,12 +30,12 @@ export const ticketChartDataAtom = atom((get) => (averages: Average[]) => {
         {
           date: item.date,
           type: "emails",
-          count: item.emails,
+          count: item.data1,
         },
         {
           date: item.date,
           type: "errors_caught",
-          count: item.errors_caught,
+          count: item.data2,
         },
       ];
       return res;

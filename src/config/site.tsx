@@ -18,9 +18,9 @@ export const navigations: Navigation[] = [
     name: "Email Assistant",
     href: "/",
   },
-  // {
-  //   icon: MessagesSquare,
-  //   name: "Ticket",
-  //   href: "/ticket",
-  // },
+  {
+    icon: MessagesSquare,
+    name: "Compliance Checker",
+    href: "/compliance",
+  },
 ];

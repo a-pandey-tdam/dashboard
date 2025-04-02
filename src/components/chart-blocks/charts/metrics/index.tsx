@@ -3,16 +3,12 @@
 import Container from "@/components/container";
 import { fetchData } from "@/api/fetchData";
 import MetricCard from "./components/metric-card";
+import type { metricsProps, Metric } from "@/types/types";
 
 import { useState, useEffect } from 'react'
 
-type Metric = {
-  title: string;
-  value: string;
-  change: number;
-}
 
-export default function Metrics() {
+export default function Metrics({file}: metricsProps) {
   const [metrics, setMetrics] = useState<Metric[]>([]);
 
   useEffect(() => {
@@ -20,7 +16,7 @@ export default function Metrics() {
 
     async function getMetrics(){
       try{
-        const data = await fetchData<Metric[]>('metrics.json')
+        const data = await fetchData<Metric[]>(file)
         setMetrics(data);
       } catch (error){
         console.error('Error fetching metric data:', error);

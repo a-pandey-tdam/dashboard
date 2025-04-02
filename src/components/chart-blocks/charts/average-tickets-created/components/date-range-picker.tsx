@@ -13,17 +13,12 @@ import {
 
 import { dateRangeAtom } from "@/lib/atoms";
 import { cn } from "@/lib/utils";
-
-type Average = {
-  date: string;
-  emails: number;
-  errors_caught: number;
-}
+import type { Average } from "@/types/types";
 
 export function DatePickerWithRange( {averages} : {averages: Average[]}) {
   const [dateRange, setDateRange] = useAtom(dateRangeAtom);
 
-  const defaultDate: Date = new Date(2023, 10, 15);
+  const defaultDate: Date = new Date(2024, 10, 15);
 
   const firstAvailableDate = averages.length > 0 
   ? averages.reduce(
