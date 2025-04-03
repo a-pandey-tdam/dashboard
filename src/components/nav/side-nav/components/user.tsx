@@ -13,8 +13,8 @@ export default function User() {
             height={36}
           />
           <div className="flex flex-col">
-            <span className="text-sm font-medium">Dashboard</span>
-            <span className="text-xs text-muted-foreground">Monitor</span>
+            <span className="text-sm font-medium">BI Dashboard</span>
+            <span className="text-xs text-muted-foreground">App Monitor</span>
           </div>
         </div>
       </div>

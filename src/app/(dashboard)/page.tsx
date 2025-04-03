@@ -1,7 +1,7 @@
 import {
   AverageTicketsCreated,
   Conversions,
-  LatestEmails,
+  LatestEntries,
   CustomerSatisfication,
   Metrics,
   TicketByChannels,
@@ -24,7 +24,7 @@ export default function Home() {
           />
         </Container>
         <Container className="py-4 laptop:col-span-2">
-          <LatestEmails />
+          <LatestEntries title="Latest Emails" file="latest.json" />
         </Container>
       </div>
       {/* <div className="grid grid-cols-1 divide-y border-b border-border laptop:grid-cols-2 laptop:divide-x laptop:divide-y-0 laptop:divide-border">

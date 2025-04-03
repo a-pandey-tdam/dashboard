@@ -10,6 +10,11 @@ export type Metric = {
   change: number;
 }
 
+export type Channel = {
+  type: string,
+  value: number
+}
+
 export type TicketMetric = {
   date: string;
   type: string;
@@ -29,6 +34,13 @@ export type metricsProps = {
 
 export type latestProps = {
   title: string,
+  file: string
+}
+
+export type channelProps = {
+  title: string,
+  file: string,
+  label: string
 }
 
 export type Average = {

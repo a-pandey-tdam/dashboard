@@ -3,4 +3,4 @@ export { default as AverageTicketsCreated } from "./charts/average-tickets-creat
 export { default as Conversions } from "./charts/conversions";
 export { default as TicketByChannels } from "./charts/ticket-by-channels";
 export { default as CustomerSatisfication } from "./charts/customer-satisfication";
-export { default as LatestEmails } from  "./charts/latest-emails"
+export { default as LatestEntries } from  "./charts/latest-entries"
