@@ -7,6 +7,7 @@ import { CirclePercent } from "lucide-react";
 
 import { useState, useEffect } from 'react'
 import type { latestProps } from "@/types/types";
+import Loader from "@/components/ui/loader";
 
 // Assuming Latest can have variable keys
 type Latest = Record<string, string>;
@@ -14,11 +15,13 @@ type Latest = Record<string, string>;
 export default function LatestEntries({title, file}: latestProps) {
   const [latest, setLatest] = useState<Latest[]>([]);
   const [fields, setFields] = useState<string[]>([]);
+  const [loading, setLoading] = useState<Boolean>(true);
 
   useEffect(() => {
     let timerId: NodeJS.Timeout;
 
-    async function getMetrics(){
+    async function getData(){
+      setLoading(true);
       try{
         const data = await fetchData<Latest[]>(file);
         setLatest(data);
@@ -29,17 +32,23 @@ export default function LatestEntries({title, file}: latestProps) {
         }
       } catch (error){
         console.error('Error fetching metric data:', error);
+      } finally {
+        setLoading(false);
       }
     }
-    getMetrics();
+    getData();
 
-    timerId = setInterval(getMetrics, 60_000);
+    timerId = setInterval(getData, 60_000);
 
     return () => clearInterval(timerId);
   }, []);
 
   return (
-    <section className="flex h-full flex-col gap-4">
+    <section className="flex h-full flex-col gap-4 transition delay-150">
+      { loading? (
+        <Loader/>
+      ) : (
+      <>      
       <ChartTitle title={title} icon={CirclePercent} />
       <Container className="overflow-x-auto mt-5">
         <div className="max-h-80 overflow-y-auto rounded-lg shadow-md">
@@ -67,6 +76,9 @@ export default function LatestEntries({title, file}: latestProps) {
           </table>
         </div>
       </Container>
+      </> 
+      )}
+
     </section>
   );
 }

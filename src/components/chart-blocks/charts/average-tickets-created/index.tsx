@@ -10,6 +10,7 @@ import Chart from "./chart";
 import { DatePickerWithRange } from "./components/date-range-picker";
 import MetricCard from "./components/metric-card";
 import { averagesProps, Average, TicketMetric} from "@/types/types";
+import Loader from "@/components/ui/loader";
 
 
 const calMetricCardValue = (
@@ -24,8 +25,7 @@ const calMetricCardValue = (
 };
 
 export default function AverageTicketsCreated({title, file, series1, series2}: averagesProps) {
-
-
+  const [loading, setLoading] = useState<boolean>(true); 
   const [averages, setAverages] = useState<Average[]>([]); 
   const ticketChartData = useAtomValue(ticketChartDataAtom)(averages, series1, series2);
   const avg1 = calMetricCardValue(ticketChartData, series1);
@@ -35,25 +35,32 @@ export default function AverageTicketsCreated({title, file, series1, series2}: a
   useEffect(() => {
     let timerId: NodeJS.Timeout;
 
-    async function getMetrics(){
+    async function getData(){
+      setLoading(true);
       try{
         const data = await fetchData<Average[]>(file)
-        console.log(data)
+        console.log(data);
         setAverages(data);
       } catch (error){
         console.error('Error fetching metric data:', error);
+      } finally {
+        setLoading(false);
       }
     }
-    getMetrics();
+    getData();
 
-    timerId = setInterval(getMetrics, 60_000);
+    timerId = setInterval(getData, 60_000);
 
     return () => clearInterval(timerId)
   }, []);
 
 
   return (
-    <section className="flex h-full flex-col gap-2">
+    <section className="flex h-full flex-col gap-2 transition delay-150">
+      { loading ? (
+      <Loader/>
+      ): (
+        <>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <ChartTitle title={title} icon={FilePlus2} />
         <DatePickerWithRange averages={averages} />
@@ -75,6 +82,8 @@ export default function AverageTicketsCreated({title, file, series1, series2}: a
           <Chart averages={averages} series1 = {series1} series2 = {series2} />
         </div>
       </div>
+      </>
+      )}
     </section>
   );
 }
