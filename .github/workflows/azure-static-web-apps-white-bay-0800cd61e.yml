@@ -26,6 +26,9 @@ jobs:
         with:
           node-version: '18.19.0'
           
+      - name: Install specific npm version (6.14.18)
+        run: npm install -g npm@6.14.18
+          
       - name: Verify Node.js and npm versions
         run: |
           node -v
