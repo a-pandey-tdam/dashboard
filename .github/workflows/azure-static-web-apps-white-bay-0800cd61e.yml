@@ -22,6 +22,24 @@ jobs:
         with:
           submodules: true
           lfs: false
+      
+      # Set up Node.js 18.19.0 and npm 6.14.18
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.19.0'
+          
+      - name: Install specific npm version (6.14.18)
+        run: npm install -g npm@6.14.18
+          
+      - name: Verify Node.js and npm versions
+        run: |
+          node -v
+          npm -v
+
+      - name: Install npm dependencies
+        run: npm install
+
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
       - name: Get Id Token
