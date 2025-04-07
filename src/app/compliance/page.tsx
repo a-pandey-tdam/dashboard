@@ -1,8 +1,6 @@
 import {
   AverageTicketsCreated,
-  Conversions,
   LatestEntries,
-  CustomerSatisfication,
   Metrics,
   TicketByChannels,
 } from "@/components/chart-blocks";

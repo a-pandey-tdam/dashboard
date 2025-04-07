@@ -10,10 +10,9 @@ import Loader from "@/components/ui/loader";
 
 export default function TicketByChannels({title, file, label}:channelProps ) {
   const [channels, setChannels] = useState<Channel[]>([]);
-  const [loading, setLoading] = useState<Boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    let timerId: NodeJS.Timeout;
 
     async function getData(){
       setLoading(true);
@@ -21,14 +20,14 @@ export default function TicketByChannels({title, file, label}:channelProps ) {
         const data = await fetchData<Channel[]>(file)
         setChannels(data);
       } catch (error){
-        console.error('Error fetching metric data:', error);
+        // console.error('Error fetching metric data:', error);
       } finally {
         setLoading(false);
       }
     }
     getData();
 
-    timerId = setInterval(getData, 60_000);
+    const timerId: NodeJS.Timeout = setInterval(getData, 60_000);
 
     return () => clearInterval(timerId)
   }, []);

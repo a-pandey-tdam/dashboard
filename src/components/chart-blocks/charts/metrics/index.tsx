@@ -13,23 +13,22 @@ export default function Metrics({file}: metricsProps) {
   const [loading, setLoading] = useState<boolean>(true); 
 
   useEffect(() => {
-    let timerId: NodeJS.Timeout;
 
     async function getData() {
       setLoading(true); // Set loading to true when fetching starts
       try {
         const data = await fetchData<Metric[]>(file);
-        console.log(data);
+        // console.log(data);
         setMetrics(data);
       } catch (error) {
-        console.error('Error fetching metric data:', error);
+        // console.error('Error fetching metric data:', error);
       } finally {
         setLoading(false); // Set loading to false when fetching ends
       }
     }
 
     getData();
-    timerId = setInterval(getData, 60_000);
+    const timerId: NodeJS.Timeout = setInterval(getData, 60_000);
 
     return () => clearInterval(timerId);
   }, []);

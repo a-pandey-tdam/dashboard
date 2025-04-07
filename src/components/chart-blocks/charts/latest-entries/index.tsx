@@ -15,10 +15,9 @@ type Latest = Record<string, string>;
 export default function LatestEntries({title, file}: latestProps) {
   const [latest, setLatest] = useState<Latest[]>([]);
   const [fields, setFields] = useState<string[]>([]);
-  const [loading, setLoading] = useState<Boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    let timerId: NodeJS.Timeout;
 
     async function getData(){
       setLoading(true);
@@ -31,14 +30,14 @@ export default function LatestEntries({title, file}: latestProps) {
           setFields(Object.keys(data[0]));
         }
       } catch (error){
-        console.error('Error fetching metric data:', error);
+        // console.error('Error fetching metric data:', error);
       } finally {
         setLoading(false);
       }
     }
     getData();
 
-    timerId = setInterval(getData, 60_000);
+    const timerId: NodeJS.Timeout = setInterval(getData, 60_000);
 
     return () => clearInterval(timerId);
   }, []);

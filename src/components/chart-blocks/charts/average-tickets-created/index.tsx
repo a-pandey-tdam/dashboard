@@ -9,7 +9,7 @@ import ChartTitle from "../../components/chart-title";
 import Chart from "./chart";
 import { DatePickerWithRange } from "./components/date-range-picker";
 import MetricCard from "./components/metric-card";
-import { averagesProps, Average, TicketMetric} from "@/types/types";
+import type { averagesProps, Average, TicketMetric} from "@/types/types";
 import Loader from "@/components/ui/loader";
 
 
@@ -33,23 +33,21 @@ export default function AverageTicketsCreated({title, file, series1, series2}: a
 
 
   useEffect(() => {
-    let timerId: NodeJS.Timeout;
-
     async function getData(){
       setLoading(true);
       try{
         const data = await fetchData<Average[]>(file)
-        console.log(data);
+        // console.log(data);
         setAverages(data);
       } catch (error){
-        console.error('Error fetching metric data:', error);
+        // console.error('Error fetching metric data:', error);
       } finally {
         setLoading(false);
       }
     }
     getData();
 
-    timerId = setInterval(getData, 60_000);
+    const timerId: NodeJS.Timeout = setInterval(getData, 60_000);
 
     return () => clearInterval(timerId)
   }, []);

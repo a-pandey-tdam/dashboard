@@ -28,10 +28,10 @@ export async function fetchData<T>(filename: string): Promise<T> {
                 lease = await acquireBlobLeaseAsync(blobClient);
             } catch (error) {
                 if (Date.now() - startTime >= leaseTimeout) {
-                    console.error("Failed to acquire lease within 15 seconds.", error);
+                    // console.error("Failed to acquire lease within 15 seconds.", error);
                     throw error;
                 }
-                console.log("Lease acquisition failed, retrying...");
+                // console.log("Lease acquisition failed, retrying...");
                 await new Promise(resolve => setTimeout(resolve, leaseRetryInterval));
             }
         }
@@ -47,17 +47,14 @@ export async function fetchData<T>(filename: string): Promise<T> {
             throw new Error(`Failed to fetch "${filename}": ${response.statusText}`);
         }
         
-        return (await response.json() as T);
-    } catch (error) {
-        console.error("Error fetching data:", error);
-        throw error;
+        return (await response.json() as T); 
     } finally {
         if (lease) {
             try {
                 await releaseBlobLeaseAsync(blobClient, lease.leaseId);
-                console.log("Lease released successfully.", filename);
+                // console.log("Lease released successfully.", filename);
             } catch (releaseError) {
-                console.error("Error releasing lease:", releaseError);
+                // console.error("Error releasing lease:", releaseError);
             }
         }
     }

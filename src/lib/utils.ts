@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { BlobLeaseClient, BlobClient } from "@azure/storage-blob";
+import type { BlobLeaseClient, BlobClient } from "@azure/storage-blob";
 
 export async function acquireBlobLeaseAsync(blobClient: BlobClient) {
   
