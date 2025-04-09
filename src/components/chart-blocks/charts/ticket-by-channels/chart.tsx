@@ -27,7 +27,7 @@ export default function Chart({ticketByChannels, label}: chartProps) {
     [] as { type: string; value: number; realValue: number }[],
   );
   
-  const totalTickets = data.reduce((acc, curr) => acc + curr.value, 0);
+  const totalTickets = data.reduce((acc, curr) => acc + curr.realValue, 0);
   
   const spec: IPieChartSpec = {
     type: "pie",
